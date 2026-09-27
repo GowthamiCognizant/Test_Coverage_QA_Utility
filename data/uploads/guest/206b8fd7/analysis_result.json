@@ -1,0 +1,74 @@
+{
+  "summary": {
+    "total": 1,
+    "covered": 0,
+    "uncovered": 1,
+    "coverage_pct": 0.0,
+    "model_used": "Claude (Anthropic)"
+  },
+  "covered_tcs": [],
+  "uncovered_tcs": [
+    {
+      "key": "AMCC-7099",
+      "summary": "Data Not in Sync: Dashboard Widgets vs. Reports",
+      "component": "Home Page Widget",
+      "priority": "High",
+      "label": "Bug",
+      "status": "Reopened",
+      "source": "Home Page Widgets"
+    }
+  ],
+  "uncovered_flows": {
+    "Dashboard and Reports Data Synchronisation": [
+      {
+        "key": "AMCC-7099",
+        "summary": "Data Not in Sync: Dashboard Widgets vs. Reports"
+      }
+    ]
+  },
+  "feature_summary": {
+    "AMCC2880.feature": [
+      "AMCC-TC-8417 Validation of total Cancelled count",
+      "AMCC-TC-8416 Validation of total delayed not shipped count",
+      "AMCC-TC-8415 Validation of total pending orders count",
+      "AMCC-TC-8414 Validation of total shipped count",
+      "AMCC-TC-8413 Validation of total orders count"
+    ],
+    "AMCC2881.feature": [
+      "AMCC-TC-8783 Validation of pallets aged over 90 days",
+      "AMCC-TC-8781 Validation of On Hold count for top 5 facilities",
+      "AMCC-TC-8780 Validation of On Hand count for top 5 facilities",
+      "AMCC-TC-6814 Validation of daily trend icon and increase/decrease sign",
+      "AMCC-TC-6810 Verifying clicking view report displays Lot Level report screen",
+      "AMCC-TC-6806 Verifying clicking view detailed inventory displays Lot Level report screen",
+      "AMCC-TC-6804 Verifying top 5 Facilities data are displayed from Lot Level Inventory report"
+    ],
+    "AMCC2882.feature": [
+      "AMCC-TC-8411 Validation of total available slots",
+      "AMCC-TC-8410 Validation of total scheduled count by scheduling an appointment",
+      "AMCC-TC-8409 Validation of total delayed count",
+      "AMCC-TC-8408 Validation of total expected count",
+      "AMCC-TC-8407 Validation of total arrived count",
+      "AMCC-TC-8406 Validation of total cancelled count",
+      "AMCC-TC-8405 Validation of total scheduled count (zero and confirm)",
+      "AMCC-TC-6836 Verifying clicking Schedule Appointment displays Schedule Appointment page",
+      "AMCC-TC-6835 Verifying clicking Track Appointments displays OLAS screen",
+      "AMCC-TC-6822 Validation of Appointment categories"
+    ],
+    "AMCC3410.feature": [
+      "AMCC-TC-6844 Validation of Widget Layout",
+      "AMCC-TC-6843 Validation of widget when no action config is available",
+      "AMCC-TC-6842 Verifying the functionality of the ellipsis button",
+      "AMCC-TC-6841 Verifying that ellipsis is not displayed when quick actions <= 5",
+      "AMCC-TC-6840 Verifying that ellipsis is displayed when quick actions > 5",
+      "AMCC-TC-6838 Validation of Action buttons"
+    ]
+  },
+  "meta": {
+    "jira_files": 1,
+    "feature_files": 4,
+    "total_jira_tcs": 1,
+    "total_scenarios": 28,
+    "model_used": "Claude (Anthropic)"
+  }
+}

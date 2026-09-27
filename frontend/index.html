@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Analysis Coverage Utility</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.2.0/tabler-icons.min.css" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: #f0ede8;
+        color: #1a1a1a;
+      }
+      :root {
+        --bg-main:    #f0ede8;
+        --bg-card:    #ffffff;
+        --bg-sidebar: #1a1a1a;
+        --accent:     #c8a96e;
+        --accent-dim: rgba(200,169,110,0.15);
+        --accent-border: rgba(200,169,110,0.35);
+        --green:      #4a7c3f;
+        --green-bg:   #eaf3e6;
+        --amber:      #a06020;
+        --amber-bg:   #fdf3e3;
+        --blue:       #1a4f8a;
+        --blue-bg:    #e8f0fb;
+        --red:        #8a1a1a;
+        --red-bg:     #fce8e8;
+        --border:     rgba(0,0,0,0.08);
+        --border-md:  rgba(0,0,0,0.14);
+        --shadow-sm:  0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+        --shadow-md:  0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+        --radius-sm:  6px;
+        --radius-md:  10px;
+        --radius-lg:  14px;
+        --radius-xl:  18px;
+        --font-sans:  'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        --font-mono:  'SF Mono', 'Fira Code', monospace;
+        --color-background-primary:   #ffffff;
+        --color-background-secondary: #f5f2ed;
+        --color-background-tertiary:  #f0ede8;
+        --color-background-info:      #e8f0fb;
+        --color-background-success:   #eaf3e6;
+        --color-background-warning:   #fdf3e3;
+        --color-background-danger:    #fce8e8;
+        --color-text-primary:         #1a1a1a;
+        --color-text-secondary:       #5a5650;
+        --color-text-tertiary:        #9a968e;
+        --color-text-info:            #1a4f8a;
+        --color-text-success:         #2e5c24;
+        --color-text-warning:         #7a4810;
+        --color-text-danger:          #7a1818;
+        --color-border-tertiary:      rgba(0,0,0,0.08);
+        --color-border-secondary:     rgba(0,0,0,0.14);
+        --color-border-primary:       rgba(0,0,0,0.24);
+        --color-border-info:          #b8cef0;
+        --border-radius-md:           10px;
+        --border-radius-lg:           14px;
+      }
+      input, textarea, select {
+        width: 100%; padding: 9px 12px; font-size: 13px;
+        border: 1px solid var(--border-md);
+        border-radius: var(--radius-sm);
+        background: var(--bg-card);
+        color: var(--color-text-primary);
+        font-family: var(--font-sans);
+        outline: none; transition: border-color 0.15s, box-shadow 0.15s;
+      }
+      input:focus, textarea:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px var(--accent-dim);
+      }
+      code {
+        font-family: var(--font-mono); font-size: 12px;
+        background: var(--color-background-secondary);
+        padding: 2px 6px; border-radius: 4px;
+      }
+      ::-webkit-scrollbar { width: 6px; height: 6px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 3px; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

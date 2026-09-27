@@ -1,0 +1,10 @@
+﻿Issue Type,Issue key,Issue id,Summary,Assignee,Assignee Id,Reporter,Reporter Id,Priority,Status,Created,Updated,Due date,Resolved,Creator,Creator Id,Description,Environment,Custom field (Epic Name),Custom field (Epic Status),Custom field (Issue color),Custom field (Comments),Custom field (Feature),Labels,Labels
+Bug,AMCC-7099,1808406,Data Not in Sync: Dashboard Widgets vs. Reports,Vasanth Prabhu Sundararaj,712020:d3a9f191-9361-4edc-bb4a-e2d43375c06e,Varun Kuruvada,712020:83ac6729-0dda-48cb-b01b-2dd257364a30,High,Reopened,16/Feb/26 12:42 AM,24/Apr/26 3:45 AM,,,Varun Kuruvada,712020:83ac6729-0dda-48cb-b01b-2dd257364a30,"*Issue:* Total lack of parity between Home Page aggregates and Report-level data.
+
+*Details:* * *Orders:* Widget shows 1, Search shows 135, and View Report shows 910.
+
+*Receipts:* Widget shows 0, but ""Receipts Today"" card shows 76.5K.
+
+*Requirement:* The Global Filter context (Facility/Customer/Date) must be identical across the Dashboard, Summary Cards, and Report Table. A single ""Source of Truth"" query service should be used for both counts.
+
+",,,,,,Home Page Widget,form,form-245

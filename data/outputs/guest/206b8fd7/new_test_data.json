@@ -1,0 +1,191 @@
+{
+  "AMCC-7099": {
+    "testCaseId": "AMCC-7099",
+    "summary": "Data Not in Sync: Dashboard Widgets vs. Reports",
+    "priority": "High",
+    "area": "Dashboard",
+    "type": "Data Integrity",
+    "createdDate": "03/12/2025",
+    "updatedDate": "04/01/2025",
+    "executionDate": "04/15/2025",
+    "assignedTo": "qa.automation@company.com",
+    "reportedBy": "product.owner@company.com",
+    "environment": "Staging",
+    "inputData": {
+      "userId": "USR-20481",
+      "userRole": "Admin",
+      "dashboardId": "DASH-5521",
+      "widgetIds": [
+        "WGT-1001",
+        "WGT-1002",
+        "WGT-1003"
+      ],
+      "reportIds": [
+        "RPT-3301",
+        "RPT-3302"
+      ],
+      "dateRangeStart": "03/01/2025",
+      "dateRangeEnd": "03/31/2025",
+      "filterCriteria": {
+        "region": "North America",
+        "department": "Sales",
+        "productCategory": "Enterprise"
+      },
+      "refreshInterval": 300,
+      "dataSource": "PrimaryDB",
+      "reportType": "Monthly Summary",
+      "widgetMetrics": [
+        {
+          "widgetId": "WGT-1001",
+          "metricName": "Total Revenue",
+          "displayedValue": 1482500.0,
+          "currency": "USD"
+        },
+        {
+          "widgetId": "WGT-1002",
+          "metricName": "New Customers",
+          "displayedValue": 342
+        },
+        {
+          "widgetId": "WGT-1003",
+          "metricName": "Conversion Rate",
+          "displayedValue": 4.75,
+          "unit": "percentage"
+        }
+      ],
+      "reportMetrics": [
+        {
+          "reportId": "RPT-3301",
+          "metricName": "Total Revenue",
+          "expectedValue": 1527800.0,
+          "currency": "USD"
+        },
+        {
+          "reportId": "RPT-3302",
+          "metricName": "New Customers",
+          "expectedValue": 371
+        },
+        {
+          "reportId": "RPT-3302",
+          "metricName": "Conversion Rate",
+          "expectedValue": 5.12,
+          "unit": "percentage"
+        }
+      ]
+    },
+    "testSteps": [
+      {
+        "stepNumber": 1,
+        "action": "Log in with Admin credentials",
+        "expectedResult": "User is successfully logged into the application"
+      },
+      {
+        "stepNumber": 2,
+        "action": "Navigate to Dashboard page with ID DASH-5521",
+        "expectedResult": "Dashboard loads successfully with all widgets visible"
+      },
+      {
+        "stepNumber": 3,
+        "action": "Note the values displayed in WGT-1001, WGT-1002, WGT-1003 for date range 03/01/2025 to 03/31/2025",
+        "expectedResult": "Widget values are loaded and visible"
+      },
+      {
+        "stepNumber": 4,
+        "action": "Navigate to Reports section and open RPT-3301 and RPT-3302 with the same date range and filters",
+        "expectedResult": "Reports load successfully with data for the specified date range"
+      },
+      {
+        "stepNumber": 5,
+        "action": "Compare Total Revenue value from WGT-1001 against RPT-3301",
+        "expectedResult": "Values should match within an acceptable tolerance of 0.01%"
+      },
+      {
+        "stepNumber": 6,
+        "action": "Compare New Customers value from WGT-1002 against RPT-3302",
+        "expectedResult": "Values should be identical"
+      },
+      {
+        "stepNumber": 7,
+        "action": "Compare Conversion Rate value from WGT-1003 against RPT-3302",
+        "expectedResult": "Values should match within an acceptable tolerance of 0.01%"
+      },
+      {
+        "stepNumber": 8,
+        "action": "Trigger a manual data refresh on the dashboard and re-compare all values",
+        "expectedResult": "After refresh, all widget values should synchronize and match report values"
+      }
+    ],
+    "expectedOutput": {
+      "syncStatus": "IN_SYNC",
+      "totalRevenue": {
+        "widgetValue": 1527800.0,
+        "reportValue": 1527800.0,
+        "discrepancy": 0.0,
+        "status": "MATCHED"
+      },
+      "newCustomers": {
+        "widgetValue": 371,
+        "reportValue": 371,
+        "discrepancy": 0,
+        "status": "MATCHED"
+      },
+      "conversionRate": {
+        "widgetValue": 5.12,
+        "reportValue": 5.12,
+        "discrepancy": 0.0,
+        "status": "MATCHED"
+      },
+      "successMessage": "All dashboard widgets are synchronized with the corresponding report data.",
+      "lastSyncedTimestamp": "04/15/2025 14:30:00",
+      "dataConsistencyScore": 100.0
+    },
+    "currentBehavior": {
+      "syncStatus": "OUT_OF_SYNC",
+      "totalRevenue": {
+        "widgetValue": 1482500.0,
+        "reportValue": 1527800.0,
+        "discrepancy": 45300.0,
+        "status": "MISMATCH"
+      },
+      "newCustomers": {
+        "widgetValue": 342,
+        "reportValue": 371,
+        "discrepancy": 29,
+        "status": "MISMATCH"
+      },
+      "conversionRate": {
+        "widgetValue": 4.75,
+        "reportValue": 5.12,
+        "discrepancy": 0.37,
+        "status": "MISMATCH"
+      },
+      "errorMessage": "Data discrepancy detected between dashboard widgets and reports. Widget values do not reflect the latest data available in reports.",
+      "lastSyncedTimestamp": "04/14/2025 08:15:42",
+      "dataConsistencyScore": 61.2
+    },
+    "errorMessages": {
+      "syncFailureMessage": "Dashboard widgets are out of sync with report data. Please refresh the dashboard or contact support.",
+      "dataMismatchAlert": "Data mismatch detected for metrics: Total Revenue, New Customers, Conversion Rate.",
+      "refreshErrorMessage": "Unable to sync dashboard widgets with latest report data. Sync failed at 04/15/2025 14:28:00.",
+      "staleDataWarning": "Dashboard data is stale. Last successful sync was on 04/14/2025 08:15:42."
+    },
+    "tags": [
+      "data-sync",
+      "dashboard",
+      "widgets",
+      "reports",
+      "data-integrity",
+      "regression"
+    ],
+    "bugReferences": [
+      "BUG-4412",
+      "BUG-4413"
+    ],
+    "relatedTestCases": [
+      "AMCC-7095",
+      "AMCC-7096",
+      "AMCC-7100"
+    ],
+    "notes": "This issue was identified during the March 2025 release cycle. The root cause is suspected to be a caching mechanism on dashboard widgets that does not invalidate properly when report data is updated. Verify that after a cache flush or forced refresh, widgets correctly pull updated values from the same data source used by reports."
+  }
+}

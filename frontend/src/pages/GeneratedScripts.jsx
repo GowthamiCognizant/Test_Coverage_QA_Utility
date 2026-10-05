@@ -1,7 +1,111 @@
 import { useState, useEffect } from "react"
 import { useAuth, useProject } from "../App"
 
-const API = "http://localhost:8000/api"
+const API = "http://localhost:8080/api"
+
+function AccuracyPanel({ projectId, token }) {
+  const [scores, setScores] = useState(null)
+  useEffect(() => {
+    fetch(`${API}/projects/${projectId}/download/generation_accuracy.json`,
+      { headers: token ? { Authorization: `Bearer ${token}` } : {} }
+    ).then(r => r.json()).then(setScores).catch(() => {})
+  }, [projectId])
+  if (!scores) return null
+  const flows = Object.values(scores)
+  const avgOverall = flows.length
+    ? Math.round(flows.reduce((a, f) => a + (f.overall_generation_confidence || 0), 0) / flows.length * 100)
+    : 0
+  const reviewCount = flows.filter(f => Math.round((f.overall_generation_confidence || 0) * 100) < 80).length
+  return (
+    <div style={{ background: "var(--color-background-primary)", border: "1px solid var(--color-border-tertiary)", borderRadius: "var(--border-radius-lg)", padding: "18px 20px", marginBottom: "20px" }}>
+      {reviewCount > 0 && (
+        <div style={{ display: "flex", alignItems: "center", gap: "10px", padding: "10px 14px", background: "#fdf3e3", border: "1px solid #f0c080", borderRadius: "8px", marginBottom: "14px" }}>
+          <i className="ti ti-alert-triangle" style={{ fontSize: "18px", color: "#a06020", flexShrink: 0 }} />
+          <span style={{ fontSize: "13px", fontWeight: 700, color: "#7a4810" }}>
+            {reviewCount} script{reviewCount > 1 ? "s" : ""} require manual review (AI confidence &lt; 80%)
+          </span>
+        </div>
+      )}
+      <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
+        <div style={{ width: "32px", height: "32px", borderRadius: "8px", background: avgOverall >= 80 ? "#eaf3e6" : "#fdf3e3", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <i className="ti ti-chart-pie" style={{ fontSize: "16px", color: avgOverall >= 80 ? "#2e6b24" : "#a06020" }} aria-hidden="true" />
+        </div>
+        <div>
+          <p style={{ fontSize: "13px", fontWeight: 600, color: "var(--color-text-primary)", margin: 0 }}>
+            Generation accuracy — avg {avgOverall}% <span style={{ fontSize: "11px", fontWeight: 400, color: "var(--color-text-tertiary)" }}>(threshold: 80% · below = manual review)</span>
+          </p>
+          <p style={{ fontSize: "12px", color: "var(--color-text-secondary)", margin: 0 }}>AI confidence in the quality of generated scripts</p>
+        </div>
+      </div>
+      {flows.map(flow => {
+        const overall = Math.round((flow.overall_generation_confidence || 0) * 100)
+        const color = overall >= 80 ? "#2e6b24" : overall >= 60 ? "#a06020" : "#8a1a1a"
+        const needsReview = overall < 80
+        return (
+          <div key={flow.flow} style={{ marginBottom: "12px", padding: "12px 14px", background: needsReview ? "#fff8f0" : "var(--color-background-secondary)", borderRadius: "var(--border-radius-md)", border: needsReview ? "1px solid #f0c080" : "none" }}>
+            {needsReview && (
+              <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "8px", padding: "6px 10px", background: "#fdf3e3", borderRadius: "6px", border: "1px solid #f0c080" }}>
+                <i className="ti ti-alert-triangle" style={{ fontSize: "13px", color: "#a06020", flexShrink: 0 }} />
+                <span style={{ fontSize: "11px", fontWeight: 700, color: "#7a4810" }}>
+                  Manual Review Required — AI confidence {overall}%
+                </span>
+              </div>
+            )}
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "8px" }}>
+              <span style={{ fontSize: "13px", fontWeight: 500, color: "var(--color-text-primary)" }}>{flow.flow}</span>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <span style={{ fontSize: "11px", fontWeight: 700, padding: "2px 8px", borderRadius: 999,
+                  background: overall >= 80 ? "#eaf3e6" : overall >= 60 ? "#fdf3e3" : "#fce8e8", color }}>
+                  <i className="ti ti-brain" style={{ fontSize: "10px", marginRight: "3px" }} />
+                  AI {overall}%
+                </span>
+                <span style={{ fontSize: "14px", fontWeight: 700, color }}>{overall}%</span>
+              </div>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "8px", marginBottom: flow.issues?.length > 0 ? "8px" : "0" }}>
+              {[
+                { label: "Scenario coverage", val: flow.scenario_coverage_score },
+                { label: "Step accuracy",     val: flow.step_accuracy_score },
+                { label: "Data completeness", val: flow.data_completeness_score },
+                { label: "Step def quality",  val: flow.step_def_completeness_score },
+              ].map(m => {
+                const pct = Math.round((m.val || 0) * 100)
+                const mc = pct >= 80 ? "#2e6b24" : pct >= 60 ? "#a06020" : "#8a1a1a"
+                const mb = pct >= 80 ? "#eaf3e6" : pct >= 60 ? "#fdf3e3" : "#fce8e8"
+                return (
+                  <div key={m.label} style={{ background: mb, borderRadius: "6px", padding: "6px 8px", textAlign: "center" }}>
+                    <div style={{ fontSize: "14px", fontWeight: 700, color: mc }}>{pct}%</div>
+                    <div style={{ fontSize: "10px", color: "var(--color-text-secondary)", marginTop: "2px" }}>{m.label}</div>
+                  </div>
+                )
+              })}
+            </div>
+            {flow.issues?.length > 0 && (
+              <div style={{ marginTop: "6px" }}>
+                {flow.issues.map((issue, i) => (
+                  <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "6px", fontSize: "11px", color: "#a06020", marginBottom: "2px" }}>
+                    <i className="ti ti-alert-circle" style={{ fontSize: "12px", flexShrink: 0, marginTop: "1px" }} aria-hidden="true" />
+                    {issue}
+                  </div>
+                ))}
+              </div>
+            )}
+            {flow.strengths?.length > 0 && (
+              <div style={{ marginTop: "4px" }}>
+                {flow.strengths.map((s, i) => (
+                  <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "6px", fontSize: "11px", color: "#2e6b24", marginBottom: "2px" }}>
+                    <i className="ti ti-check" style={{ fontSize: "12px", flexShrink: 0, marginTop: "1px" }} aria-hidden="true" />
+                    {s}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )
+      })}
+    </div>
+  )
+}
 
 export default function GeneratedScripts() {
   const { user } = useAuth()
@@ -212,82 +316,9 @@ export default function GeneratedScripts() {
           )}
 
           {/* Generation Accuracy Scores */}
-          {files.find(f => f.name === "generation_accuracy.json") && (() => {
-            const [scores, setScores] = useState(null)
-            useEffect(() => {
-              fetch(`http://localhost:8000/api/projects/${project.id}/download/generation_accuracy.json`,
-                { headers: user?.token ? { Authorization: `Bearer ${user.token}` } : {} }
-              ).then(r => r.json()).then(setScores).catch(() => {})
-            }, [])
-            if (!scores) return null
-            const flows = Object.values(scores)
-            const avgOverall = flows.length ? Math.round(flows.reduce((a,f) => a + (f.overall_generation_confidence||0), 0) / flows.length * 100) : 0
-            return (
-              <div style={{ background: "var(--color-background-primary)", border: "1px solid var(--color-border-tertiary)", borderRadius: "var(--border-radius-lg)", padding: "18px 20px", marginBottom: "20px" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
-                  <div style={{ width: "32px", height: "32px", borderRadius: "8px", background: avgOverall >= 80 ? "#eaf3e6" : "#fdf3e3", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <i className="ti ti-chart-pie" style={{ fontSize: "16px", color: avgOverall >= 80 ? "#2e6b24" : "#a06020" }} aria-hidden="true" />
-                  </div>
-                  <div>
-                    <p style={{ fontSize: "13px", fontWeight: 600, color: "var(--color-text-primary)", margin: 0 }}>
-                      Generation accuracy — avg {avgOverall}%
-                    </p>
-                    <p style={{ fontSize: "12px", color: "var(--color-text-secondary)", margin: 0 }}>AI confidence in the quality of generated scripts</p>
-                  </div>
-                </div>
-                {flows.map(flow => {
-                  const overall = Math.round((flow.overall_generation_confidence||0) * 100)
-                  const color = overall >= 80 ? "#2e6b24" : overall >= 60 ? "#a06020" : "#8a1a1a"
-                  return (
-                    <div key={flow.flow} style={{ marginBottom: "12px", padding: "12px 14px", background: "var(--color-background-secondary)", borderRadius: "var(--border-radius-md)" }}>
-                      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "8px" }}>
-                        <span style={{ fontSize: "13px", fontWeight: 500, color: "var(--color-text-primary)" }}>{flow.flow}</span>
-                        <span style={{ fontSize: "14px", fontWeight: 700, color }}>{overall}%</span>
-                      </div>
-                      <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "8px", marginBottom: flow.issues?.length > 0 ? "8px" : "0" }}>
-                        {[
-                          { label: "Scenario coverage", val: flow.scenario_coverage_score },
-                          { label: "Step accuracy",     val: flow.step_accuracy_score },
-                          { label: "Data completeness", val: flow.data_completeness_score },
-                          { label: "Step def quality",  val: flow.step_def_completeness_score },
-                        ].map(m => {
-                          const pct = Math.round((m.val||0)*100)
-                          const mc = pct >= 80 ? "#2e6b24" : pct >= 60 ? "#a06020" : "#8a1a1a"
-                          const mb = pct >= 80 ? "#eaf3e6" : pct >= 60 ? "#fdf3e3" : "#fce8e8"
-                          return (
-                            <div key={m.label} style={{ background: mb, borderRadius: "6px", padding: "6px 8px", textAlign: "center" }}>
-                              <div style={{ fontSize: "14px", fontWeight: 700, color: mc }}>{pct}%</div>
-                              <div style={{ fontSize: "10px", color: "var(--color-text-secondary)", marginTop: "2px" }}>{m.label}</div>
-                            </div>
-                          )
-                        })}
-                      </div>
-                      {flow.issues?.length > 0 && (
-                        <div style={{ marginTop: "6px" }}>
-                          {flow.issues.map((issue, i) => (
-                            <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "6px", fontSize: "11px", color: "#a06020", marginBottom: "2px" }}>
-                              <i className="ti ti-alert-circle" style={{ fontSize: "12px", flexShrink: 0, marginTop: "1px" }} aria-hidden="true" />
-                              {issue}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                      {flow.strengths?.length > 0 && (
-                        <div style={{ marginTop: "4px" }}>
-                          {flow.strengths.map((s, i) => (
-                            <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "6px", fontSize: "11px", color: "#2e6b24", marginBottom: "2px" }}>
-                              <i className="ti ti-check" style={{ fontSize: "12px", flexShrink: 0, marginTop: "1px" }} aria-hidden="true" />
-                              {s}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  )
-                })}
-              </div>
-            )
-          })()}
+          {files.find(f => f.name === "generation_accuracy.json") && (
+            <AccuracyPanel projectId={project.id} token={user?.token} />
+          )}
 
           <FileGroup title="Feature files"         accent="#0F6E56" bg="#E1F5EE" label="Feature"  fileList={features} />
           <FileGroup title="Step definition files" accent="#185FA5" bg="#E6F1FB" label="Step def" fileList={stepdefs} />

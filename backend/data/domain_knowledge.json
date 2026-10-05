@@ -1,0 +1,418 @@
+[
+  {
+    "id": "americold-overview",
+    "domain": "company",
+    "module": "general",
+    "title": "Americold — Company Overview",
+    "content": "Americold Realty Trust is the world's largest publicly traded REIT focused on temperature-controlled logistics and warehousing. Founded in 1903 and headquartered in Atlanta, Georgia, Americold operates approximately 240+ temperature-controlled warehouses globally across North America, South America, Europe, Asia-Pacific, and Australia with roughly 26,000 employees. The company serves food manufacturers, distributors, retailers, and foodservice providers — including major brands like Kraft Heinz, Nestlé, Tyson Foods, and ConAgra. Americold's core value proposition is maintaining the cold chain from production to consumer, ensuring perishable goods reach their destination at the correct temperature.",
+    "keywords": ["americold", "company", "reit", "warehouse", "temperature", "controlled", "logistics", "atlanta", "food", "manufacturer", "distributor"]
+  },
+  {
+    "id": "amcc-portal-overview",
+    "domain": "company",
+    "module": "general",
+    "title": "Americold Cold Compass (AMCC) — Portal Overview",
+    "content": "Americold Cold Compass (AMCC) is Americold's customer-facing warehouse management system portal. It gives customers real-time visibility into their inventory stored at Americold facilities. Key capabilities: view and manage inventory levels, submit and track inbound shipments (receipts), create and manage outbound orders, run inventory and activity reports, manage user access and roles, submit claims, and view audit trails. AMCC is a web-based portal used daily by supply chain planners, warehouse coordinators, logistics managers, and customer service teams. It integrates with Americold's internal WMS (Blue Yonder / JDA) and exposes customer-relevant data through a secure API layer.",
+    "keywords": ["amcc", "cold compass", "portal", "wms", "customer", "inventory", "visibility", "blue yonder", "jda"]
+  },
+  {
+    "id": "cold-chain-fundamentals",
+    "domain": "cold_chain",
+    "module": "general",
+    "title": "Cold Chain Fundamentals",
+    "content": "The cold chain is an unbroken temperature-controlled supply chain from production to the end consumer. Any break in the cold chain can cause spoilage, food safety risks, and regulatory non-compliance. Key temperature zones at Americold: (1) Frozen: -18°C (0°F) or below — for ice cream, frozen meals, seafood; (2) Refrigerated / Chill: 0°C–4°C (32°F–39°F) — for dairy, fresh produce, meat; (3) Controlled Room Temperature (CRT): 15°C–25°C (59°F–77°F) — for chocolate, wine, pharmaceuticals. A temperature deviation is any event where product temperature moves outside the specified range. FIFO (First In First Out) and FEFO (First Expired First Out) are critical rotation strategies. FEFO is required for food products with expiry dates to minimise waste and comply with regulations.",
+    "keywords": ["cold chain", "temperature", "frozen", "refrigerated", "chill", "FIFO", "FEFO", "deviation", "zone", "spoilage", "food safety"]
+  },
+  {
+    "id": "temperature-zones",
+    "domain": "cold_chain",
+    "module": "general",
+    "title": "Temperature Zones and Management",
+    "content": "Americold manages multiple temperature zones within each facility. Frozen zone (-18°C and below): products stored include frozen meals, ice cream, frozen seafood, frozen vegetables, frozen meat. Refrigerated / Chill zone (0°C–4°C): products include dairy, fresh produce, fresh meat, chilled ready meals. Controlled Room Temperature (CRT, 15°C–25°C): confectionery, wine, pharmaceuticals, dry goods. Temperature monitoring uses IoT sensors placed throughout the facility. Alarms trigger automatically when temperature deviates. Cold chain break protocol: immediately document the deviation, check product integrity, notify customer, initiate claim process if product is damaged. HACCP (Hazard Analysis Critical Control Points) plans are maintained for each zone and product type.",
+    "keywords": ["temperature zone", "frozen", "refrigerated", "CRT", "IoT", "sensor", "alarm", "HACCP", "cold chain break", "deviation", "monitoring"]
+  },
+  {
+    "id": "inbound-receipts-overview",
+    "domain": "operations",
+    "module": "inbound",
+    "title": "Inbound / Receipts Process — Overview",
+    "content": "The inbound receipts process manages the arrival and storage of customer goods at Americold facilities. End-to-end flow: (1) Customer creates an Advanced Shipment Notification (ASN) / Receipt in AMCC with product details, quantities, lot numbers, expiry dates, and expected arrival date. (2) Carrier arrives at facility dock — dock scheduling system assigns a door. (3) Warehouse staff verify the shipment against the ASN — product count, condition check, temperature verification. (4) If discrepancies exist (shorts, overs, damages) they are documented as exceptions. (5) Product is scanned and assigned a storage location based on product type, temperature zone, and available space. (6) Put-away is completed, inventory is updated in real-time. (7) Receipt confirmation is sent to the customer. Key fields: PO number, vendor/supplier, item code, lot number, expiry date, quantity received, temperature on arrival.",
+    "keywords": ["inbound", "receipts", "ASN", "advanced shipment notification", "receiving", "dock", "put-away", "lot number", "expiry", "receipt entry", "PO"]
+  },
+  {
+    "id": "inbound-asn-creation",
+    "domain": "operations",
+    "module": "inbound",
+    "title": "Creating an ASN / Inbound Receipt in AMCC",
+    "content": "Steps to create an inbound receipt (ASN) in AMCC: (1) Navigate to Inbound > Receipt Entry. (2) Enter the expected arrival date and carrier name. (3) Add product lines: item code/SKU, description, expected quantity, unit of measure (cases/pallets), lot number, and expiry date. (4) For each line, specify the temperature zone required. (5) Attach any supporting documents (packing list, COA — Certificate of Analysis). (6) Submit the ASN. The system assigns a Receipt ID. (7) Share the Receipt ID with the carrier for dock check-in. Validation rules: item codes must match the customer's product catalogue, expiry date must be in the future, lot numbers must be unique per product per receipt. Common errors: item not found in catalogue, duplicate lot number, invalid UOM (unit of measure).",
+    "keywords": ["ASN", "receipt entry", "inbound", "item code", "SKU", "lot number", "expiry", "UOM", "create receipt", "carrier", "dock"]
+  },
+  {
+    "id": "inbound-exceptions",
+    "domain": "operations",
+    "module": "inbound",
+    "title": "Inbound Exceptions and Discrepancies",
+    "content": "Inbound exceptions occur when the physical shipment does not match the ASN. Types of inbound exceptions: (1) Short shipment — fewer units received than expected. (2) Over shipment — more units than the ASN. (3) Damage on arrival — product damaged during transit. (4) Temperature deviation on arrival — product arrived outside the specified temperature range. (5) Lot number mismatch — product has a different lot number than the ASN. (6) Expiry date discrepancy. Exception handling process: warehouse staff document exceptions in the system with quantity and description. A notification is sent to the customer. Customer can accept the exception, reject the shipment, or initiate a supplier claim. Temperature deviations require a temperature log from the carrier and may trigger a claim against the carrier.",
+    "keywords": ["exception", "discrepancy", "short shipment", "over shipment", "damage", "temperature deviation", "lot number mismatch", "claim", "arrival"]
+  },
+  {
+    "id": "outbound-overview",
+    "domain": "operations",
+    "module": "outbound",
+    "title": "Outbound / Shipping Process — Overview",
+    "content": "The outbound process manages the picking, packing, and shipping of customer goods from Americold facilities to their customers (retailers, distributors). End-to-end flow: (1) Customer creates an outbound order in AMCC with destination, products, quantities, and required ship date. (2) Americold WMS receives the order and plans the pick wave. (3) Warehouse staff pick the product from storage locations using RF scanners. FEFO rotation is applied — oldest product (earliest expiry) is picked first. (4) Picked product is staged at the outbound dock. (5) Temperature check is performed before loading. (6) Load is confirmed in the system. (7) Bill of Lading (BOL) is generated. (8) ASN is sent to the customer (EDI 856). (9) Order status updates to 'Shipped'. Key fields: order number, ship-to address, carrier, requested ship date, product lines with lot numbers and quantities.",
+    "keywords": ["outbound", "shipping", "order", "pick", "wave", "FEFO", "bill of lading", "BOL", "carrier", "EDI 856", "ASN", "shipped"]
+  },
+  {
+    "id": "outbound-order-creation",
+    "domain": "operations",
+    "module": "outbound",
+    "title": "Creating an Outbound Order in AMCC",
+    "content": "Steps to create an outbound order: (1) Navigate to Outbound > Order Entry. (2) Enter ship-to customer and delivery address. (3) Select carrier and service type (standard, expedited, refrigerated truck). (4) Enter requested ship date and delivery date. (5) Add product lines: item code, quantity, UOM. (6) Optionally specify lot numbers for lot-controlled shipments. (7) Submit order — system validates inventory availability. (8) If inventory is available, order is confirmed (status: Confirmed). If insufficient stock, order is placed on hold (status: Backordered). Order statuses in AMCC: Draft → Submitted → Confirmed → In Pick → Loaded → Shipped → Delivered → Closed. Order changes are allowed before picking begins. Once in 'In Pick' status, changes require a supervisor override.",
+    "keywords": ["outbound order", "order entry", "carrier", "ship date", "product", "quantity", "lot", "confirmed", "backordered", "status", "pick"]
+  },
+  {
+    "id": "order-maintenance",
+    "domain": "operations",
+    "module": "orders",
+    "title": "Order Maintenance",
+    "content": "Order Maintenance in AMCC allows customers to view, modify, and manage their outbound orders. Key operations: (1) View order details — current status, line items, pick progress. (2) Modify open orders — change quantities, delivery dates, carrier (only before picking starts). (3) Cancel orders — allowed before 'In Pick' status with approval. (4) Split orders — split one order into multiple shipments. (5) Combine orders — merge multiple orders to the same destination onto one load. (6) Add / remove lines — available before the pick wave is released. (7) Put order on hold — pause picking pending customer instruction. (8) Release hold — resume picking. (9) View BOL and packing list documents. Automated alerts: order confirmation, pick complete, load confirmation, out for delivery. Order Maintenance integrates with Inventory to check real-time availability when modifications are made.",
+    "keywords": ["order maintenance", "modify order", "cancel order", "split", "combine", "hold", "release", "BOL", "packing list", "status", "modification"]
+  },
+  {
+    "id": "inventory-management-overview",
+    "domain": "operations",
+    "module": "inventory",
+    "title": "Inventory Management — Overview",
+    "content": "AMCC inventory management provides real-time visibility into all customer stock held at Americold facilities. Key concepts: (1) On-hand inventory — total quantity currently in the warehouse. (2) Available inventory — on-hand minus any reserved or held quantities. (3) Reserved inventory — committed to open outbound orders. (4) Held inventory — quarantined for quality reasons or pending customer instruction. (5) Damaged inventory — product that failed inspection or was damaged in-house. Inventory is tracked at lot level for full traceability. Expiry date management: AMCC provides expiry alerts (30/60/90 day warnings). Customers can instruct disposition of expiring product (return to vendor, donate, destroy). Inventory adjustments: if physical count differs from system count, an adjustment is raised, documented with reason code, and requires customer approval for significant variances.",
+    "keywords": ["inventory", "on-hand", "available", "reserved", "held", "damaged", "lot", "expiry", "adjustment", "count", "traceability", "quarantine"]
+  },
+  {
+    "id": "inventory-fefo-rotation",
+    "domain": "operations",
+    "module": "inventory",
+    "title": "FEFO and FIFO Inventory Rotation",
+    "content": "FEFO (First Expired First Out) is the default rotation strategy at Americold for all products with expiry dates. FEFO ensures that the product with the earliest expiry date is picked first, minimising waste and meeting food safety requirements. FIFO (First In First Out) is used for products without expiry dates, ensuring the oldest stock is shipped first. How FEFO works in AMCC: when an outbound order is picked, the WMS automatically selects the lot with the earliest expiry date. Customers can override the rotation for a specific order (e.g., customer requests a specific lot). Mixed rotation: some customers use best-before dates rather than use-by dates — AMCC supports configuring rotation rules per product. Monitoring: AMCC shows inventory sorted by expiry date, with colour-coded alerts for product approaching expiry.",
+    "keywords": ["FEFO", "FIFO", "rotation", "expiry", "lot", "first expired", "first in", "oldest", "pick", "waste", "food safety"]
+  },
+  {
+    "id": "holds-management",
+    "domain": "operations",
+    "module": "holds",
+    "title": "Holds Management",
+    "content": "Holds in AMCC place inventory in a quarantine state, preventing it from being picked or shipped. Types of holds: (1) Quality Hold — product failed QC inspection, pending lab results or customer decision. (2) Customer Hold — customer-initiated hold, e.g., pending recall investigation. (3) Regulatory Hold — imposed by USDA, FDA, or customs. (4) Billing Hold — customer account has outstanding invoices. (5) Temperature Deviation Hold — product was held after a temperature excursion. Hold process: (1) Hold is created with a reason code and expiry date. (2) Inventory is flagged as unavailable. (3) Customer is notified. (4) Customer reviews and provides disposition instructions: Release hold (back to available), Rework (CMO services), Return to vendor, Destroy. Hold types A and B in AMCC (holds-management-a and holds-management-b) represent different severity or action categories.",
+    "keywords": ["hold", "holds management", "quarantine", "quality", "regulatory", "temperature deviation", "disposition", "release hold", "USDA", "FDA", "recall"]
+  },
+  {
+    "id": "claims-overview",
+    "domain": "operations",
+    "module": "claims",
+    "title": "Claims Management — Overview",
+    "content": "The claims module in AMCC enables customers to log, track, and resolve claims against Americold or carriers for loss, damage, or temperature deviations. Types of claims: (1) Inbound damage claim — product arrived damaged (claim against carrier or vendor). (2) Outbound damage claim — product damaged during loading or transit (claim against carrier or Americold). (3) Temperature deviation claim — product exposed to out-of-range temperature during storage or transit. (4) Short shipment claim — fewer units received or shipped than documented. (5) Over shipment claim — more units than invoiced. (6) Theft or loss claim — product missing from storage. Claim lifecycle: Open → Under Investigation → Evidence Submitted → Settled / Closed / Denied. Key evidence: temperature logs, BOL, inspection photos, packing list, COA.",
+    "keywords": ["claims", "damage", "temperature deviation", "short shipment", "loss", "theft", "inbound claim", "outbound claim", "investigation", "settlement"]
+  },
+  {
+    "id": "claims-outbound",
+    "domain": "operations",
+    "module": "claims",
+    "title": "Outbound Claims Process",
+    "content": "Outbound claims are raised when goods are damaged or lost during outbound shipping. Process: (1) Customer or consignee reports damage on delivery — signs BOL with exception note. (2) Customer logs claim in AMCC Claims module: select the outbound order, enter damage description, quantity affected, and estimated value. (3) Attach supporting documents: signed BOL, damage photos, inspection report. (4) Americold claims team investigates — reviews CCTV if available, temperature logs, handling records. (5) Carrier is notified if carrier liability is determined. (6) Claims team updates status to 'Under Investigation'. (7) Resolution: credit note issued to customer, carrier invoice adjusted, or claim denied with reason. Target resolution time: Critical claims within 5 business days, standard claims within 15 business days. Claims automation: AMCC can auto-generate claims for temperature deviations exceeding threshold.",
+    "keywords": ["outbound claim", "damage", "BOL exception", "carrier liability", "credit note", "investigation", "resolution", "CCTV", "temperature log"]
+  },
+  {
+    "id": "claims-regression-testing",
+    "domain": "testing",
+    "module": "claims",
+    "title": "Claims — QA Regression Test Scenarios",
+    "content": "Key test scenarios for the Claims module: (1) Create inbound damage claim — verify claim ID generated, status = Open, notification sent to customer. (2) Create outbound claim with temperature deviation — verify temperature log is attached, claim category = Temperature Deviation. (3) Attach evidence documents — verify file upload, size limits enforced (max 10MB per file), accepted formats (PDF, JPG, PNG). (4) Update claim status — verify state machine: Open → Under Investigation → Settled transitions. (5) Deny a claim — verify denial reason is mandatory, customer receives notification. (6) Claim value validation — negative values rejected, value must not exceed original order value. (7) Duplicate claim detection — system warns if a claim already exists for the same order. (8) Claim search and filter — filter by status, date range, claim type, customer. Tags: @claims-regression, @claims-outbound-regression.",
+    "keywords": ["claims test", "regression", "damage", "temperature", "attach", "evidence", "status", "state machine", "duplicate", "search", "filter"]
+  },
+  {
+    "id": "reports-overview",
+    "domain": "reporting",
+    "module": "reports",
+    "title": "Reports Module — Overview",
+    "content": "The Reports module in AMCC provides customers with operational reports for inventory, activity, and compliance. Standard reports: (1) Total Inventory Report — snapshot of all on-hand inventory by item, lot, location, and expiry date. (2) Inventory Activity Report — all movements in/out for a date range (receipts, shipments, adjustments). (3) Field Reports — facility-level operational data provided by the Americold warehouse team. (4) Inbound Receipt Summary — all receipts for a period, with quantities and exceptions. (5) Outbound Shipment Summary — all shipments for a period. (6) Aging Inventory Report — inventory held longer than 30/60/90/180 days. (7) Expiry Alert Report — products expiring within configurable thresholds. (8) Temperature Compliance Report — temperature log data for regulatory compliance. Report formats: PDF, Excel (XLSX), CSV. Scheduled reports can be auto-emailed to customers.",
+    "keywords": ["reports", "inventory report", "activity report", "field reports", "total inventory", "aging", "expiry", "temperature compliance", "PDF", "Excel", "CSV", "scheduled"]
+  },
+  {
+    "id": "field-reports",
+    "domain": "reporting",
+    "module": "reports",
+    "title": "Field Reports",
+    "content": "Field Reports in AMCC are facility-level reports generated by the Americold warehouse management team and shared with customers through the portal. Field reports may include: daily inventory counts, receipt confirmation details, discrepancy reports, quality inspection reports, and operational notes from the facility. Key characteristics: field reports are uploaded by the Americold operations team (not auto-generated by the system). They can be in PDF or Excel format. Customers receive a notification when a new field report is available. Field reports are accessible from the Reports section and can be downloaded or viewed in-browser. They complement the system-generated reports with on-the-ground operational insights specific to a facility.",
+    "keywords": ["field reports", "facility", "warehouse", "operational", "uploaded", "PDF", "Excel", "notification", "download", "daily", "inventory count"]
+  },
+  {
+    "id": "total-inventory-report",
+    "domain": "reporting",
+    "module": "reports",
+    "title": "Total Inventory Report",
+    "content": "The Total Inventory Report provides a real-time snapshot of all inventory held at Americold for the customer. Columns included: Item Code, Item Description, Lot Number, Expiry Date, Receipt Date, Location, Temperature Zone, On-Hand Quantity, Available Quantity, Reserved Quantity, Held Quantity, Unit of Measure, Pallet Count. Filtering options: by facility, item code, lot number, expiry date range, temperature zone. This report is the primary report used for inventory reconciliation between the customer's ERP and Americold's WMS. Reconciliation best practice: run the Total Inventory Report at month-end and reconcile against the customer's SAP/Oracle stock balance. Discrepancies are investigated via the Inventory Activity Report to trace movements. The report can be exported to Excel for detailed analysis.",
+    "keywords": ["total inventory", "snapshot", "on-hand", "available", "reserved", "held", "lot", "expiry", "reconciliation", "ERP", "SAP", "Oracle", "pallet count"]
+  },
+  {
+    "id": "audit-trail-overview",
+    "domain": "compliance",
+    "module": "audit",
+    "title": "Audit Trail — Overview",
+    "content": "The Audit Trail module in AMCC provides a complete, tamper-proof log of all system transactions and user actions. Every significant event is captured: user logins and logouts, inventory movements (receipts, shipments, adjustments), order creates, modifies, cancellations, hold placements and releases, claims created and updated, role and permission changes, and configuration changes. Audit records include: timestamp (UTC), user ID, action type, entity type (order, receipt, inventory), entity ID, old value, new value, and facility. Audit Trail is critical for: regulatory compliance (FDA 21 CFR Part 11, FSMA), dispute resolution (proving when an action was taken), security audits (detecting unauthorised access), and SOX compliance for public companies. Data retention: audit records are retained for a minimum of 7 years.",
+    "keywords": ["audit trail", "log", "history", "compliance", "FDA", "FSMA", "SOX", "transaction", "user action", "tamper-proof", "retention", "7 years"]
+  },
+  {
+    "id": "audit-trail-testing",
+    "domain": "testing",
+    "module": "audit",
+    "title": "Audit Trail — QA Test Scenarios",
+    "content": "Key test scenarios for the Audit Trail module: (1) Verify audit record created on inventory receipt — check timestamp, user, action = RECEIPT_CREATED. (2) Verify audit record on order modification — old quantity vs new quantity captured. (3) Verify hold creation audit — reason code logged, placed-by user recorded. (4) Verify user login/logout captured — failed login attempts also logged. (5) Verify role change audit — when a user's role is changed, old role and new role are both captured. (6) Filter audit trail by date range — results returned within specified dates only. (7) Filter by user — all actions by a specific user. (8) Filter by entity type — show only inventory adjustments. (9) Export audit trail to CSV/Excel — verify all columns present. (10) Verify immutability — no system user can delete or edit audit records. Tags: @audit-trail-regression, @audit-trail-regression-new.",
+    "keywords": ["audit test", "regression", "receipt", "order modification", "hold", "login", "role change", "filter", "export", "immutable", "delete"]
+  },
+  {
+    "id": "cmo-overview",
+    "domain": "operations",
+    "module": "cmo",
+    "title": "CMO — Contract Manufacturing Operations",
+    "content": "CMO (Contract Manufacturing Operations) at Americold refers to value-added services performed at the warehouse facility beyond storage. Services include: (1) Blast Freezing — rapid freezing of fresh or chilled product to extend shelf life. Product enters at refrigerated temperature, exits frozen at -18°C. (2) Tempering — controlled thawing of frozen product to a specific temperature (e.g., -2°C to -4°C) for downstream processing. (3) Repacking — transferring product from original supplier packaging to customer-branded packaging or retail packaging. (4) Labelling — applying price labels, country-of-origin labels, promotional labels, or compliance labels. (5) Kitting — assembling promotional gift packs or mixed SKU cases. (6) Quality Inspection — detailed product inspection before outbound shipment. CMO jobs are created in AMCC against specific inventory lots, with defined input quantity, output quantity, and labour hours. Output inventory is posted back to available stock.",
+    "keywords": ["CMO", "contract manufacturing", "blast freezing", "tempering", "repacking", "labelling", "kitting", "value added", "processing", "freeze", "thaw"]
+  },
+  {
+    "id": "cmo-testing",
+    "domain": "testing",
+    "module": "cmo",
+    "title": "CMO — QA Test Scenarios",
+    "content": "Key test scenarios for the CMO module: (1) Create a blast freeze job — input: chilled product lot, target temperature -18°C, estimated duration. Verify job ID created. (2) Complete blast freeze job — verify output lot created with updated temperature zone (Frozen). (3) Create repacking job — input: bulk cases, output: retail packs. Verify input lot decremented, output lot created. (4) Partial completion — blast freeze job partially completed. Verify partial quantity updated. (5) CMO job cancellation — cancel a pending job, verify inventory released back to available. (6) Labour hours tracking — verify actual hours vs estimated captured. (7) CMO report — verify all completed jobs appear in CMO activity report. (8) Temperature verification after CMO — product must meet target temperature before output is posted. Tags: @cmo.",
+    "keywords": ["CMO test", "blast freeze", "repacking", "labelling", "job", "partial completion", "cancel", "labour hours", "output lot", "temperature"]
+  },
+  {
+    "id": "action-plans",
+    "domain": "operations",
+    "module": "action_plans",
+    "title": "Action Plans",
+    "content": "Action Plans in AMCC are structured task lists created to address operational issues, quality problems, or process improvements at an Americold facility. An action plan is created when: a customer complaint is received, a temperature deviation occurs, an audit finding is raised, or a CAPA (Corrective and Preventive Action) is required. Action plan structure: (1) Plan title and description. (2) Root cause analysis. (3) Action items — each with assigned owner, due date, and status (Open, In Progress, Closed). (4) Priority (Critical, High, Medium, Low). (5) Target completion date. (6) Verification step — confirming the action resolved the issue. Action plans are linked to related records (claims, holds, audit events). Status dashboard shows overdue action items. Notifications are sent to action item owners when due dates approach.",
+    "keywords": ["action plan", "CAPA", "corrective action", "root cause", "temperature deviation", "audit", "task", "owner", "due date", "notification", "overdue"]
+  },
+  {
+    "id": "rules-engine",
+    "domain": "configuration",
+    "module": "rules_engine",
+    "title": "Rules Engine",
+    "content": "The Rules Engine in AMCC allows administrators to configure automated business rules that trigger actions based on defined conditions. Use cases: (1) Auto-hold rule — if a receipt temperature deviates by more than 2°C, automatically place the lot on hold. (2) Expiry alert rule — if product expiry is within 30 days, send alert to customer. (3) Auto-claim rule — if temperature deviation exceeds threshold during outbound transit, auto-generate a claim. (4) Replenishment rule — alert customer when inventory falls below a defined minimum quantity. (5) SLA escalation rule — if a claim is open for more than 5 days without update, escalate to manager. Rule components: trigger event (receipt created, temperature alert, inventory below threshold), condition (temperature > X, quantity < Y, days > Z), action (send email, create hold, create claim, send notification). Rules can be enabled/disabled without deleting them.",
+    "keywords": ["rules engine", "automation", "rule", "trigger", "condition", "action", "auto-hold", "expiry alert", "auto-claim", "replenishment", "SLA escalation", "enable", "disable"]
+  },
+  {
+    "id": "manage-configurations",
+    "domain": "configuration",
+    "module": "configurations",
+    "title": "Manage Configurations",
+    "content": "Manage Configurations in AMCC allows system administrators to set up and customise the portal for a customer account. Key configuration areas: (1) Product catalogue — define all item codes, descriptions, UOM, temperature zones, and rotation strategy (FEFO/FIFO) per item. (2) Facility setup — configure which Americold facilities the customer's inventory is stored at. (3) Carrier setup — define preferred carriers and service types. (4) Notification settings — configure email notifications per event type (receipt confirmed, order shipped, etc.) per user. (5) SLA configuration — set SLA thresholds for claims, order processing, and receipt confirmation. (6) Currency and UOM settings. (7) EDI configuration — set up EDI trading partner connections (850/855/856 transactions). (8) Integration settings — API key management for third-party integrations. Changes to configurations are audited.",
+    "keywords": ["configuration", "product catalogue", "item code", "facility setup", "carrier", "notification", "SLA", "EDI", "API key", "UOM", "currency", "integration"]
+  },
+  {
+    "id": "admin-user-management",
+    "domain": "admin",
+    "module": "admin",
+    "title": "Admin — User Management",
+    "content": "User Management in AMCC allows administrators to create, modify, and deactivate user accounts. Covered in the @admin-module tag and @user-management regression suite. Operations: (1) Create user — enter email, name, phone, role assignment, facility access. Activation email is sent to the new user. (2) Modify user — update name, phone number, role, facility access. (3) Deactivate user — removes login access without deleting the user record. Audit trail is preserved. (4) Reset password — admin can trigger a password reset email. (5) Bulk user import — CSV upload to create multiple users at once. (6) User search — search by name, email, role, status (Active/Inactive). (7) Last login visibility — admins can see when each user last accessed the portal. Validation: email must be unique, role must be assigned before saving, facility access must be configured.",
+    "keywords": ["user management", "create user", "modify user", "deactivate", "password reset", "bulk import", "role", "facility access", "admin", "email", "activation"]
+  },
+  {
+    "id": "admin-role-management",
+    "domain": "admin",
+    "module": "admin",
+    "title": "Admin — Role Management",
+    "content": "Role Management in AMCC defines what actions each user type can perform. Roles are hierarchical: System Admin > Account Admin > Manager > Operator > Read-Only. Standard roles: (1) System Admin — full access to all modules, configurations, and user management. (2) Account Admin — manage users and roles within their account. (3) Ordering Manager — create/modify/cancel outbound orders. (4) Warehouse Coordinator — manage inbound receipts and inventory. (5) Reports User — view and download reports only. (6) Claims Manager — create and manage claims. Custom roles can be created by combining specific module permissions. Role permissions are checked at the API level — not just the UI. Role changes take effect immediately — no re-login required. When a user is assigned a more restrictive role, their active session is re-validated within 15 minutes.",
+    "keywords": ["role management", "role", "permission", "system admin", "account admin", "manager", "operator", "read only", "custom role", "module permission", "hierarchy"]
+  },
+  {
+    "id": "admin-access-management",
+    "domain": "admin",
+    "module": "admin",
+    "title": "Admin — Access Item Management",
+    "content": "Access Item Management (also called Access Management) in AMCC controls which specific items (menu items, features, data access) a user or role can see and interact with. This is more granular than role-level permissions. Access items can be: (1) Module-level — can the user see the Orders module at all? (2) Function-level — can the user cancel orders (not just view them)? (3) Data-level — can the user only see their facility's data, or all facilities? Access items are grouped by module. Administrators assign access item sets to roles. When creating a custom role, the admin selects access items from a checklist grouped by module (Inbound, Outbound, Inventory, Reports, Claims, CMO, etc.). Access item changes are effective immediately. Audit trail records all access item changes. The @access-management tag covers regression tests for this module.",
+    "keywords": ["access management", "access item", "permission", "module access", "function access", "data access", "granular", "role", "checklist", "audit", "facility"]
+  },
+  {
+    "id": "admin-message-center",
+    "domain": "admin",
+    "module": "admin",
+    "title": "Admin — Message Centre",
+    "content": "Message Centre in AMCC is the in-portal notification and messaging system. Administrators can: (1) Create system-wide announcements — broadcast messages to all users (e.g., scheduled maintenance, new feature announcements). (2) Create targeted messages — send messages to specific users or roles. (3) Configure automated message templates — templates used by the Rules Engine and system events (order confirmation, receipt alert, claim update). (4) Set message expiry — messages can be set to auto-expire after a defined date. (5) View message history — all sent messages with read/unread status per user. Users receive a notification badge in the portal when new messages arrive. Messages can link to specific records (click to view the referenced order, receipt, or claim). @message-center regression tests cover create, send, read, expiry, and notification badge behaviour.",
+    "keywords": ["message centre", "notification", "announcement", "broadcast", "template", "automated message", "expiry", "read", "unread", "badge", "targeted message"]
+  },
+  {
+    "id": "admin-login",
+    "domain": "admin",
+    "module": "admin",
+    "title": "Admin — Login and Authentication",
+    "content": "AMCC login and authentication: (1) Standard login — email and password on the login page. Failed login attempts are counted; 5 failed attempts locks the account for 30 minutes. (2) Password policy — minimum 8 characters, at least 1 uppercase, 1 number, 1 special character. Passwords expire every 90 days. (3) Single Sign-On (SSO) — AMCC supports SAML 2.0 SSO integration with corporate identity providers (Azure AD, Okta). (4) Multi-Factor Authentication (MFA) — optional but recommended; supports TOTP apps (Google Authenticator, Microsoft Authenticator). (5) Session management — sessions expire after 30 minutes of inactivity. Concurrent sessions are limited to 3 per user. (6) Password reset — self-service via email link (expires in 24 hours). (7) First login — user must change temporary password on first login. @login regression tests cover all authentication flows.",
+    "keywords": ["login", "authentication", "password", "SSO", "SAML", "MFA", "session", "password reset", "account lockout", "first login", "Azure AD", "Okta", "TOTP"]
+  },
+  {
+    "id": "admin-homepage-widgets",
+    "domain": "admin",
+    "module": "admin",
+    "title": "Admin — Homepage and Dashboard Widgets",
+    "content": "The AMCC homepage dashboard is customisable per user or role. Widgets available: (1) Inventory Summary — current on-hand, available, held quantities. (2) Pending Receipts — count of open ASNs due for arrival in the next 7 days. (3) Open Orders — count of outbound orders in various statuses. (4) Expiry Alerts — products expiring within 30/60 days. (5) Open Claims — count and value of active claims. (6) Temperature Alerts — active temperature deviations. (7) Action Plans — overdue action items. (8) Recent Activity Feed — latest system events. Administrators configure default dashboards per role. Users can personalise their own dashboard by adding, removing, or reordering widgets. Widget visibility is controlled by module access permissions. @homepage-widgets regression tests cover widget rendering, data accuracy, and customisation persistence.",
+    "keywords": ["homepage", "dashboard", "widget", "customise", "inventory summary", "pending receipts", "open orders", "expiry alert", "temperature alert", "recent activity", "personalise"]
+  },
+  {
+    "id": "admin-menu",
+    "domain": "admin",
+    "module": "admin",
+    "title": "Admin — Menu and Navigation Configuration",
+    "content": "AMCC menu configuration allows administrators to customise the navigation menu shown to users. Operations: (1) Enable/disable menu items — hide modules not applicable to the customer (e.g., hide CMO if customer doesn't use the service). (2) Rename menu labels — change 'Inbound' to 'Receipts' for a customer who prefers that terminology. (3) Reorder menu items — adjust the order modules appear in the left navigation. (4) Create custom menu links — add links to external systems (e.g., link to customer's ERP). (5) Role-based menu visibility — menu items are automatically hidden if the user's role doesn't have access to that module (access item check). Menu configuration is stored per account (not per user). Menus are loaded at login and cached for the session. Menu changes by admin take effect on next user login.",
+    "keywords": ["menu", "navigation", "menu configuration", "disable menu", "rename", "reorder", "custom link", "role-based", "visibility", "admin", "session"]
+  },
+  {
+    "id": "ci-events-overview",
+    "domain": "operations",
+    "module": "ci_events",
+    "title": "CI Events — Customer Integration Events",
+    "content": "CI Events (Customer Integration Events) in AMCC are automated data exchange events between Americold's WMS and the customer's external systems (ERP, TMS, EDI). These events ensure real-time synchronisation of inventory movements, order statuses, and shipment confirmations. Common CI event types: (1) Inbound Receipt Confirmation — triggered when a receipt is closed in the WMS; sends item, lot, quantity, temperature data to the customer. (2) Outbound Shipment Confirmation — triggered when a load is shipped; sends BOL, carrier, tracking number. (3) Inventory Snapshot — scheduled daily/hourly push of on-hand inventory to customer ERP. (4) Order Status Update — real-time push of order status changes. (5) Holds Notification — when a hold is placed/released on inventory. CI events use EDI (850/855/856/940/945), API webhooks, or SFTP file drops depending on the customer's integration capability.",
+    "keywords": ["CI events", "integration", "EDI", "API", "webhook", "SFTP", "receipt confirmation", "shipment confirmation", "inventory snapshot", "order status", "ERP", "TMS"]
+  },
+  {
+    "id": "ci-event-regression-1",
+    "domain": "testing",
+    "module": "ci_events",
+    "title": "CI Events Regression — Release 1 Scope",
+    "content": "CI Event Regression 1 (@ci-event-regression-1) covers the first regression batch for customer integration event testing. Scenarios covered: (1) Inbound receipt event — verify event payload structure, required fields, correct lot/quantity data. (2) Order creation event — verify order ID, line items, customer reference included. (3) Inventory snapshot event — verify full inventory snapshot includes all on-hand lots. (4) Event retry logic — if customer endpoint returns 5xx, system retries up to 3 times with exponential backoff. (5) Event authentication — verify API key / HMAC signature validation. (6) Event idempotency — duplicate event not sent for the same transaction. (7) EDI 856 (ASN) format validation. 321 scenarios covering the baseline integration event flows.",
+    "keywords": ["CI event regression 1", "release 1", "inbound event", "order event", "snapshot", "retry", "authentication", "idempotency", "EDI 856", "payload", "regression"]
+  },
+  {
+    "id": "ci-event-regression-2",
+    "domain": "testing",
+    "module": "ci_events",
+    "title": "CI Events Regression — Release 2 Scope",
+    "content": "CI Event Regression 2 (@ci-event-regression-2) covers the second regression batch for customer integration events, focusing on more complex flows. Scenarios covered: (1) Hold placement / release events — verify customer is notified when holds are placed or released with reason code. (2) Temperature deviation event — verify alert event sent when sensor reading exceeds threshold. (3) CMO completion event — verify output lot details sent after blast freeze or repacking. (4) Claim status event — notify customer of claim status changes. (5) Bulk event processing — verify system handles 1000+ events per minute without dropping events. (6) Event schema versioning — older client schema still processed correctly. (7) WebSocket real-time events vs batch SFTP delivery modes. 292 scenarios covering advanced integration flows.",
+    "keywords": ["CI event regression 2", "release 2", "hold event", "temperature event", "CMO event", "claim event", "bulk", "schema versioning", "WebSocket", "SFTP", "batch"]
+  },
+  {
+    "id": "inbound-regression-testing",
+    "domain": "testing",
+    "module": "inbound",
+    "title": "Inbound Receipts — QA Regression Test Scenarios",
+    "content": "Key test scenarios for the Inbound module: (1) Create receipt with all mandatory fields — verify Receipt ID generated, status = Draft. (2) Submit receipt — status changes to Submitted, ASN sent to WMS. (3) Receipt with multiple product lines — verify each line independently validated. (4) Receipt quantity validation — zero and negative quantities rejected. (5) Lot number uniqueness check — duplicate lot for same item raises error. (6) Temperature zone validation — item's configured zone must match receipt zone. (7) Expiry date in the past — system rejects or warns based on configuration. (8) Large receipt (100+ lines) — verify performance, no timeout. (9) Receipt amendment before arrival — modify quantity and dates before receipt is processed. (10) Cancel receipt — verify inventory not affected, status = Cancelled. (11) Receipt search — search by Receipt ID, date range, item code, lot. Tags: @receipts-entry.",
+    "keywords": ["inbound test", "receipts entry", "regression", "lot number", "expiry", "temperature zone", "cancel receipt", "amendment", "search", "validation", "quantity"]
+  },
+  {
+    "id": "outbound-regression-testing",
+    "domain": "testing",
+    "module": "outbound",
+    "title": "Outbound Orders — QA Regression Test Scenarios",
+    "content": "Key test scenarios for the Outbound module: (1) Create outbound order — verify order ID, status = Draft. (2) Submit order with sufficient inventory — status = Confirmed. (3) Submit order with insufficient inventory — status = Backordered, alert raised. (4) FEFO rotation — verify earliest expiry lot is selected for picking. (5) Specific lot pick — customer requests specific lot, verify lot allocation. (6) Order modification before pick — change quantity, verify inventory re-allocated. (7) Cancel order before pick — verify inventory released, customer notified. (8) Cancel order during pick — requires supervisor override, partial shipment handling. (9) Split order — verify two order IDs created from one, total quantity preserved. (10) BOL generation — verify carrier details, total weight, pieces count. (11) Outbound order search — filter by status, date, carrier, destination. Tags: @orders, @order-maintainance-regression.",
+    "keywords": ["outbound test", "order", "regression", "FEFO", "lot pick", "modification", "cancel", "split", "BOL", "backorder", "carrier", "quantity"]
+  },
+  {
+    "id": "inventory-regression-testing",
+    "domain": "testing",
+    "module": "inventory",
+    "title": "Inventory Management — QA Regression Test Scenarios",
+    "content": "Key test scenarios for inventory: (1) Total inventory report — verify all on-hand lots appear, quantities match WMS. (2) Inventory adjustment — add/subtract quantity with reason code, verify audit trail created. (3) Hold placement — place quality hold on a lot, verify lot no longer available for orders. (4) Hold release — release hold, verify lot returned to available. (5) Transfer between zones — move from refrigerated to frozen, verify temperature zone updated. (6) Expiry date update — verify FEFO re-sorting after expiry change. (7) Inventory reconciliation — compare portal inventory with WMS system. (8) Cycle count — initiate count, enter physical count, system calculates variance. (9) Damaged inventory — mark lot as damaged, verify removed from available. (10) Inventory activity report — verify all movements in date range shown. Tags: @total-inventory-regression, @inventory-activity-regression.",
+    "keywords": ["inventory test", "regression", "adjustment", "hold", "transfer", "expiry", "reconciliation", "cycle count", "damaged", "activity report", "FEFO", "zone"]
+  },
+  {
+    "id": "admin-regression-testing",
+    "domain": "testing",
+    "module": "admin",
+    "title": "Admin Module — QA Regression Test Scenarios",
+    "content": "Key regression test scenarios for the admin module, covering all sub-modules. User Management: create user, assign role, activate/deactivate. Role Management: create custom role, assign permissions, test access enforcement. Access Item Management: add/remove access items from role, verify menu changes. Login: valid login, invalid password lockout, SSO flow, MFA setup. Message Centre: create announcement, verify user notification, mark as read. Homepage Widgets: add widget, reorder, verify data accuracy. Menu Configuration: disable module menu item, verify hidden for role. These are all covered under the @admin-module tag (699 scenarios) which is the largest tag in the automation suite. Sub-tags: @user-management (138), @role-management (88), @access-management (151), @message-center (130), @login (70), @homepage-widgets (84), @administration (249).",
+    "keywords": ["admin test", "regression", "user management", "role", "access item", "login", "message centre", "widget", "menu", "admin-module", "administration"]
+  },
+  {
+    "id": "sanity-testing",
+    "domain": "testing",
+    "module": "general",
+    "title": "Sanity and Smoke Testing",
+    "content": "Sanity testing (@sanity, 474 scenarios) is a subset of regression tests that runs after every deployment to verify core functionality is intact. Sanity test coverage: login flow, create a receipt, create an outbound order, view inventory report, view dashboard widgets, basic claim creation. These tests take approximately 15–20 minutes to run (vs 110+ hours for full regression). Smoke test is a lighter version (approximately 50 scenarios, ~3 minutes) covering only the happy path for the most critical business flows. Smoke tests run after each CI/CD deployment. Sanity tests run nightly. Full regression runs on weekends. @regression tag (2699 scenarios) covers the complete regression suite for all modules. CI/CD pipeline: smoke → sanity → regression in sequential gates.",
+    "keywords": ["sanity", "smoke test", "regression", "deployment", "CI/CD", "critical", "happy path", "nightly", "pipeline", "gate", "15 minutes"]
+  },
+  {
+    "id": "wms-integration-architecture",
+    "domain": "technical",
+    "module": "general",
+    "title": "AMCC Technical Architecture — WMS Integration",
+    "content": "AMCC (Americold Cold Compass) sits as a customer-facing presentation layer above Americold's core WMS (Blue Yonder / JDA). Architecture layers: (1) AMCC Portal — React-based web UI, deployed on Azure/AWS. Customer-facing, role-based access. (2) AMCC API — FastAPI (Python) REST API layer. Handles business logic, validation, and orchestration. (3) Integration layer — connects to internal WMS via message queue (Kafka/RabbitMQ) or direct API calls. (4) WMS (Blue Yonder) — internal warehouse management system used by Americold operations. Customers do not interact directly with WMS. (5) Data layer — PostgreSQL for AMCC data, read-replicas for reporting. (6) Notification service — Twilio/SendGrid for SMS/email notifications. Real-time updates use WebSocket connections. API authentication uses JWT tokens with 1-hour expiry.",
+    "keywords": ["architecture", "WMS", "Blue Yonder", "JDA", "API", "FastAPI", "React", "Kafka", "PostgreSQL", "Azure", "JWT", "integration", "WebSocket"]
+  },
+  {
+    "id": "edi-integration",
+    "domain": "technical",
+    "module": "ci_events",
+    "title": "EDI Integration at Americold",
+    "content": "EDI (Electronic Data Interchange) is the automated exchange of business documents between Americold and its customers/carriers. Key EDI transaction sets used at Americold: (1) EDI 850 — Purchase Order (customer sending an order to Americold). (2) EDI 855 — Purchase Order Acknowledgement (Americold confirming order received). (3) EDI 856 — Advanced Ship Notice (ASN sent by Americold when shipment leaves). (4) EDI 940 — Warehouse Shipping Order (Americold-internal, trigger WMS to pick). (5) EDI 945 — Warehouse Shipping Advice (WMS confirms pick complete to AMCC). (6) EDI 944 — Warehouse Stock Transfer Receipt (confirmation of inbound receipt). EDI communication uses AS2 protocol or SFTP. ANSI X12 standard format. EDI mapping is configured in the integration layer per trading partner. Errors in EDI are logged in the CI Events section of AMCC.",
+    "keywords": ["EDI", "850", "855", "856", "940", "945", "944", "AS2", "SFTP", "ANSI X12", "trading partner", "purchase order", "ASN", "WMS"]
+  },
+  {
+    "id": "food-safety-compliance",
+    "domain": "compliance",
+    "module": "general",
+    "title": "Food Safety Compliance at Americold",
+    "content": "Americold operates under strict food safety regulations. Key regulations: (1) FDA FSMA (Food Safety Modernization Act) — requires preventive controls for warehousing of human and animal food. Americold is subject to the Sanitary Transportation rule and Preventive Controls rule. (2) USDA requirements — for meat, poultry, and egg products stored at Americold. (3) SQF (Safe Quality Food) Certification — Americold maintains SQF Level 2 or 3 at most facilities. (4) HACCP — facilities maintain HACCP plans documenting critical control points (temperature, sanitation). (5) FDA 21 CFR Part 11 — electronic records and signatures must be authentic, accurate, and preserved. (6) Global Food Safety Initiative (GFSI) — Americold's certifications (SQF, BRC) are GFSI-recognised. Audit Trail in AMCC supports compliance with FDA 21 CFR Part 11 by providing tamper-proof electronic records.",
+    "keywords": ["food safety", "FSMA", "FDA", "USDA", "SQF", "HACCP", "21 CFR Part 11", "compliance", "GFSI", "BRC", "sanitation", "preventive controls"]
+  },
+  {
+    "id": "profile-management",
+    "domain": "admin",
+    "module": "admin",
+    "title": "Admin — Profile Management",
+    "content": "Profile Management in AMCC allows users to manage their own account settings. Features: (1) Update personal details — name, job title, phone number. (2) Change password — requires current password verification. (3) Set communication preferences — choose which system events trigger email or SMS notifications. (4) Set language/locale — AMCC supports English, French (Canada), Spanish (US). (5) Set timezone — ensures dates and times display correctly for the user's location. (6) Two-factor authentication — users can enable/disable MFA from their profile. (7) View active sessions — see all active login sessions, with option to terminate suspicious ones. (8) API key management — users with API access can generate and revoke personal API keys. Profile changes are saved immediately. Communication preference changes take effect for the next triggered notification.",
+    "keywords": ["profile", "account settings", "password change", "notification preference", "language", "locale", "timezone", "MFA", "active sessions", "API key"]
+  },
+  {
+    "id": "regression-suite-overview",
+    "domain": "testing",
+    "module": "general",
+    "title": "Automation Suite — Regression Testing Overview",
+    "content": "The AMCC automation suite uses Python Behave for BDD (Behaviour-Driven Development) testing. Total: ~449 feature files, 4,822 BDD scenarios across 21 module folders. Key automation tags by scenario count: @regression (2699) — full suite, @admin-module (699) — all admin sub-modules, @ci-events-regression (613) — all CI event flows, @cmo (572) — CMO operations, @sanity (474) — sanity test subset, @ci-event-regression-1 (321) — Release 1 CI events, @ci-event-regression-2 (292) — Release 2 CI events, @action-plan (284) — action plan flows, @administration (249) — administration sub-flows, @audit-trail-regression (207) — audit trail scenarios, @claims-regression (153) — claims flows, @access-management (151) — access item tests, @user-management (138) — user CRUD. Full suite estimated runtime: 110+ hours. Golden Suite (curated tag set) runs in ~6 hours.",
+    "keywords": ["automation suite", "behave", "BDD", "feature files", "scenarios", "tags", "regression", "admin-module", "CI events", "sanity", "runtime", "golden suite"]
+  },
+  {
+    "id": "holds-testing",
+    "domain": "testing",
+    "module": "holds",
+    "title": "Holds Management — QA Test Scenarios",
+    "content": "Key test scenarios for Holds Management. Holds-Management-A (110 scenarios): standard hold flows — (1) Create quality hold on a specific lot. (2) Verify lot unavailable for outbound order after hold. (3) Partial hold — hold specific quantity within a lot. (4) Release hold with reason code. (5) Hold expiry — verify hold auto-released after configured expiry date. (6) Hold notification to customer — email/portal notification sent. (7) Hold audit trail — hold creation, modification, and release all audited. Holds-Management-B (135 scenarios): complex hold scenarios — (1) Regulatory hold with external reference number (FDA inspection ID). (2) Billing hold — order creation blocked for accounts on billing hold. (3) Temperature deviation hold — auto-created by Rules Engine. (4) Hold escalation — if unresolved after X days, escalate to account manager. (5) Bulk hold — place hold on all lots of an item across all facilities.",
+    "keywords": ["holds test", "holds-management-a", "holds-management-b", "quality hold", "partial hold", "release hold", "billing hold", "regulatory hold", "temperature hold", "escalation", "bulk hold"]
+  },
+  {
+    "id": "action-plan-testing",
+    "domain": "testing",
+    "module": "action_plans",
+    "title": "Action Plans — QA Test Scenarios",
+    "content": "Key test scenarios for Action Plans: (1) Create action plan from a temperature deviation — verify plan linked to deviation record. (2) Add action items with due dates — verify due date validation (cannot be in the past). (3) Assign action item to user — user receives notification. (4) Complete an action item — status changes to Closed, completion date recorded. (5) Overdue action item alert — if action item passes due date without completion, escalation email sent. (6) Close action plan — requires all action items to be Closed first. (7) Action plan linked to claim — verify claim reference displayed in plan. (8) Priority change — changing priority from Medium to Critical triggers immediate notification to manager. (9) Action plan report — verify all open plans and overdue items in report export. (10) Action plan search — filter by status, priority, owner, due date. Tags: @action-plan, @action-plan-new.",
+    "keywords": ["action plan test", "temperature deviation", "due date", "overdue", "escalation", "close plan", "claim link", "priority", "notification", "search", "filter"]
+  },
+  {
+    "id": "inventory-activity-report",
+    "domain": "reporting",
+    "module": "reports",
+    "title": "Inventory Activity Report",
+    "content": "The Inventory Activity Report shows all inventory movements for a specified date range and facility. Movement types captured: (1) RCPT — Receipt (inbound). (2) SHIP — Shipment (outbound). (3) ADJ+ / ADJ- — Inventory adjustment (positive or negative). (4) XFR — Zone transfer. (5) HOLD — Hold placement. (6) RLSE — Hold release. (7) CMO-IN / CMO-OUT — CMO input/output. (8) DAM — Damage write-off. Columns in the report: Transaction Date, Transaction Type, Item Code, Lot Number, Expiry Date, Quantity, Reference (Receipt ID / Order ID), Location, Temperature Zone, User. Use cases: reconciling inventory with ERP, tracking down a missing lot, verifying FEFO rotation was applied, generating data for food safety audits. Selectable date range: up to 12 months. Filterable by item, lot, transaction type. Tags: @inventory-activity-regression.",
+    "keywords": ["inventory activity", "movements", "receipt", "shipment", "adjustment", "transfer", "hold", "CMO", "damage", "transaction", "reconciliation", "date range"]
+  },
+  {
+    "id": "electronic-data-interchange-flow",
+    "domain": "technical",
+    "module": "ci_events",
+    "title": "CI Events — Integration Flow Walkthrough",
+    "content": "Full CI Events integration flow example for an outbound order: (1) Customer sends EDI 850 (Purchase Order) to Americold integration hub. (2) Integration hub validates 850, converts to AMCC order format, creates order in AMCC (status: Confirmed). (3) AMCC sends EDI 855 (Purchase Order Acknowledgement) back to customer. (4) WMS picks the order — AMCC order status updates to 'In Pick' via EDI 940/945 cycle. (5) Load departs facility — AMCC sends EDI 856 (ASN) to customer with lot numbers, quantities, carrier, PRO number. (6) AMCC CI Event triggers — sends webhook POST to customer endpoint with JSON payload containing all shipment details. (7) Customer system receives event, updates their ERP, sends HTTP 200 acknowledgement. (8) If 500 error received, AMCC retries 3x with exponential backoff (1 min, 2 min, 4 min). (9) Failed event after retries goes to dead-letter queue and creates alert in AMCC CI Events dashboard. Tags: @ci-events-regression.",
+    "keywords": ["CI events flow", "EDI 850", "EDI 855", "EDI 856", "EDI 940", "EDI 945", "webhook", "retry", "dead-letter", "outbound flow", "integration", "ERP"]
+  },
+  {
+    "id": "tiv-inventory",
+    "domain": "reporting",
+    "module": "reports",
+    "title": "Total Inventory Valuation (TIV)",
+    "content": "Total Inventory Valuation (TIV) extends the Total Inventory Report by adding financial valuation to each inventory lot. Used for: financial reporting, insurance purposes, and customer ERP reconciliation. TIV columns: Item Code, Description, Lot Number, Expiry Date, On-Hand Quantity, Cost Price per Unit, Total Value, Currency. Cost price is maintained in the customer's product catalogue (configurable in Manage Configurations). TIV report can be run in two modes: (1) At-cost — using the configured cost price. (2) At-declared-value — using the declared value from the original receipt. TIV is typically run at month-end for financial close. The @tiv-new automation tag covers new TIV feature regression tests. Supports multi-currency; currency conversion uses exchange rates as of the report date.",
+    "keywords": ["TIV", "total inventory valuation", "cost price", "financial", "insurance", "valuation", "currency", "month-end", "declared value", "product catalogue"]
+  },
+  {
+    "id": "amcc-releases-overview",
+    "domain": "testing",
+    "module": "general",
+    "title": "AMCC Release Structure and Testing Strategy",
+    "content": "Americold Cold Compass follows a phased release strategy. Key releases: Americold Compass V0.4 — initial MVP with core inbound/outbound/inventory modules. v1.0 — first GA release; added claims, reports, and admin modules. v1.2 — CI Events integration and EDI support added. v1.3 — CMO module, action plans, holds management added. v2.0 — major platform upgrade; rules engine, manage configurations, TIV. v3.0 — current release; advanced analytics, mobile app, API v3. Each release has a corresponding Jira fix version. QA testing strategy per release: (1) Smoke test immediately after deploy. (2) Regression suite for all impacted modules. (3) CI Events regression for integration impacts. (4) Performance testing for high-volume releases. Test environment: DEV → SIT → UAT → PROD.",
+    "keywords": ["release", "v0.4", "v1.0", "v1.2", "v1.3", "v2.0", "v3.0", "phased release", "regression", "smoke test", "DEV", "SIT", "UAT", "PROD", "fix version"]
+  }
+]

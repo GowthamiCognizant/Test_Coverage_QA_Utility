@@ -9,7 +9,14 @@ class BaseAIModel(ABC):
     """
 
     @abstractmethod
-    def analyze_coverage(self, jira_tcs: list, feature_scenarios: list) -> dict:
+    def analyze_coverage(
+        self,
+        jira_tcs: list,
+        feature_scenarios: list,
+        previous_analysis=None,
+        previous_jira_tcs=None,
+        env_configs=None,
+    ) -> dict:
         """
         Given a list of Jira TCs and existing feature file scenarios,
         perform flow-wise gap analysis and return structured result.
@@ -43,4 +50,9 @@ class BaseAIModel(ABC):
     @abstractmethod
     def model_name(self) -> str:
         """Human-readable model name shown in the UI."""
+        pass
+
+    @abstractmethod
+    def chat(self, prompt: str) -> str:
+        """Single-turn text generation. Used by agents that need ad-hoc AI calls."""
         pass

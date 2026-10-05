@@ -1,0 +1,12 @@
+
+── QA Coverage Utility startup ───────────────────────────
+  CLAUDE_API_KEY      : sk-ant-a...rQAA  ✓
+  GEMINI_API_KEY      : AQ.Ab8RN...eWTw  ✓
+  JWT_SECRET      : using default (change in production)
+  JIRA            : https://americold.atlassian.net  ✓
+  QMETRY          : configured  ✓
+  SMTP            : smtp.gmail.com  ✓
+──────────────────────────────────────────────────────────
+
+INFO:     127.0.0.1:55656 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61658 - "GET /api/projects/000demo0/coverage/code-scan HTTP/1.1" 200 OK

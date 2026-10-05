@@ -15,6 +15,7 @@ To add a new key:
 """
 
 import os
+import re
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -31,25 +32,32 @@ JWT_SECRET: str = os.getenv("JWT_SECRET", "qa-utility-default-secret-change-in-p
 
 # ── Server ────────────────────────────────────────────────────────────────────
 HOST: str = os.getenv("HOST", "0.0.0.0")
-PORT: int = int(os.getenv("PORT", "8000"))
+PORT: int = int(os.getenv("PORT", "8080"))
 
 # ── Jira Cloud (Agent 1 input layer) ──────────────────────────────────────────
 # Cloud uses Basic auth: email + API token from
 # https://id.atlassian.com/manage-profile/security/api-tokens
 JIRA_BASE_URL: str = os.getenv("JIRA_BASE_URL", "").rstrip("/")
 JIRA_EMAIL: str = os.getenv("JIRA_EMAIL", "")
-JIRA_API_TOKEN: str = os.getenv("JIRA_API_TOKEN", "")
-JIRA_PROJECT_KEY: str = os.getenv("JIRA_PROJECT_KEY", "")
+# Alias: the team .env names this atlassian_Jira_API_Token
+JIRA_API_TOKEN: str = os.getenv("JIRA_API_TOKEN") or os.getenv("atlassian_Jira_API_Token", "")
+_raw_project_key: str = os.getenv("JIRA_PROJECT_KEY", "")
+# Handle "Project Name (KEY)" display format → extract just the key
+_key_match = re.search(r'\(([A-Z][A-Z0-9_-]+)\)\s*$', _raw_project_key)
+JIRA_PROJECT_KEY: str = _key_match.group(1) if _key_match else _raw_project_key
 
-# ── QMetry for Jira (QTM4J app inside Jira) ───────────────────────────────────
-# Test cases are Jira issues, so they come through the Jira REST API.
-# Execution results come from the QMetry Open API, whose base path differs
-# between QMetry versions — override QMETRY_API_BASE if yours is different.
-QMETRY_API_KEY: str = os.getenv("QMETRY_API_KEY", "")
-QMETRY_API_BASE: str = os.getenv(
-    "QMETRY_API_BASE", f"{JIRA_BASE_URL}/rest/qtm4j/rest/api/v2" if JIRA_BASE_URL else ""
-).rstrip("/")
+# ── QMetry Test Management for Jira Cloud (QTM4J) ────────────────────────────
+# QTM4J Cloud exposes its Open API on a separate host, authenticated with the
+# "apiKey" header (Jira > Apps > QMetry > Configuration > Open API).
+# Alias: the team .env names this qmetry_API_Key
+QMETRY_API_KEY: str = os.getenv("QMETRY_API_KEY") or os.getenv("qmetry_API_Key", "")
+QMETRY_API_BASE: str = os.getenv("QMETRY_API_BASE", "https://qtmcloud.qmetry.com/rest/api/latest").rstrip("/")
 QMETRY_TEST_ISSUE_TYPES: str = os.getenv("QMETRY_TEST_ISSUE_TYPES", "Test,Test Case")
+
+# Optional Jira custom field that holds acceptance criteria, e.g. customfield_10035
+JIRA_ACCEPTANCE_FIELD: str = os.getenv("JIRA_ACCEPTANCE_FIELD", "")
+# Set to "false" behind a corporate proxy that re-signs TLS certificates
+HTTP_VERIFY_SSL: bool = os.getenv("HTTP_VERIFY_SSL", "true").lower() != "false"
 
 # ── SMTP (Agent 4 auto-email to teams) ────────────────────────────────────────
 SMTP_HOST: str = os.getenv("SMTP_HOST", "")
@@ -58,6 +66,9 @@ SMTP_USER: str = os.getenv("SMTP_USER", "")
 SMTP_PASSWORD: str = os.getenv("SMTP_PASSWORD", "")
 SMTP_FROM: str = os.getenv("SMTP_FROM", SMTP_USER)
 SMTP_USE_TLS: bool = os.getenv("SMTP_USE_TLS", "true").lower() == "true"
+
+# Link placed in Agent 4 emails so teams can record their Go-Live approval
+APP_URL: str = os.getenv("APP_URL", "http://localhost:3000")
 
 
 def jira_configured() -> bool:

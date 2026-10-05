@@ -4,6 +4,9 @@ import Upload from "./pages/Upload"
 import FeatureFiles from "./pages/FeatureFiles"
 import Analysis from "./pages/Analysis"
 import GeneratedScripts from "./pages/GeneratedScripts"
+import GoldenSuite from "./pages/GoldenSuite"
+import RiskScanner from "./pages/RiskScanner"
+import DomainExpert from "./pages/DomainExpert"
 import AuthModal from "./components/AuthModal"
 import Sidebar from "./components/Sidebar"
 import Topbar from "./components/Topbar"
@@ -14,7 +17,7 @@ export const ProjectContext = createContext(null)
 export function useAuth() { return useContext(AuthContext) }
 export function useProject() { return useContext(ProjectContext) }
 
-const API = "http://localhost:8000/api"
+const API = "http://localhost:8080/api"
 
 export async function apiFetch(path, opts = {}, token = null) {
   const headers = { ...(opts.headers || {}) }
@@ -28,12 +31,29 @@ export async function apiFetch(path, opts = {}, token = null) {
   return res.json()
 }
 
+// Fetches a file endpoint and triggers a browser download with the server's filename
+export async function apiDownload(path, token = null, fallbackName = "download") {
+  const res = await fetch(`${API}${path}`, { headers: token ? { Authorization: `Bearer ${token}` } : {} })
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ detail: "Download failed" }))
+    throw new Error(err.detail || "Download failed")
+  }
+  const cd = res.headers.get("Content-Disposition") || ""
+  const name = (cd.match(/filename="?([^"]+)"?/) || [])[1] || fallbackName
+  const url = URL.createObjectURL(await res.blob())
+  const a = document.createElement("a"); a.href = url; a.download = name
+  document.body.appendChild(a); a.click(); a.remove()
+  URL.revokeObjectURL(url)
+}
+
 export default function App() {
   const [user, setUser] = useState(() => {
     try { return JSON.parse(localStorage.getItem("tcu_user")) } catch { return null }
   })
   const [project, setProject] = useState(null)
-  const [page, setPage] = useState("dashboard")
+  const [page, setPageState] = useState(() => window.location.hash.slice(1) || "dashboard")
+  // Mirror the page in the URL hash so pages can be bookmarked / deep-linked (#golden, #risk …)
+  function setPage(p) { setPageState(p); window.history.replaceState(null, "", `#${p}`) }
   const [showAuthModal, setShowAuthModal] = useState(false)
   const [authMode, setAuthMode] = useState("login")
 
@@ -63,7 +83,7 @@ export default function App() {
   function openLogin() { setAuthMode("login"); setShowAuthModal(true) }
   function openRegister() { setAuthMode("register"); setShowAuthModal(true) }
 
-  const pages = { dashboard: Dashboard, upload: Upload, features: FeatureFiles, analysis: Analysis, scripts: GeneratedScripts }
+  const pages = { dashboard: Dashboard, upload: Upload, features: FeatureFiles, analysis: Analysis, scripts: GeneratedScripts, golden: GoldenSuite, risk: RiskScanner, domain: DomainExpert }
   const PageComponent = pages[page] || Dashboard
 
   return (
